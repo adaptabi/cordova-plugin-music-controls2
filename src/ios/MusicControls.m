@@ -326,6 +326,13 @@ MusicControlsInfo * musicControlsSettings;
         [commandCenter.skipBackwardCommand removeTarget:self];
     }
     
+    [commandCenter.playCommand setEnabled:false];
+    NSError *error = nil;
+    [[AVAudioSession sharedInstance] setActive:NO error:&error];
+    if (error) {
+        NSLog(@"Error deactivating audio session: %@", error);
+    }
+    
     [self setLatestEventCallbackId:nil];
 }
 
